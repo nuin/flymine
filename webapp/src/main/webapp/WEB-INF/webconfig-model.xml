@@ -11,6 +11,51 @@
     </fields>
   </class>
 
+  <!-- FBab aberrations (added 2026-06-01 with flybase-aberrations source) -->
+  <class className="org.intermine.model.bio.Aberration">
+    <headerconfig>
+      <titles>
+        <title mainTitles="symbol|primaryIdentifier" />
+      </titles>
+      <customlinks>
+        <customlink
+          url="http://flybase.org/reports/{primaryIdentifier}.html"
+          image="flybase_logo.jpeg"
+        />
+      </customlinks>
+    </headerconfig>
+    <fields>
+      <fieldconfig fieldExpr="primaryIdentifier"/>
+      <fieldconfig fieldExpr="symbol"/>
+      <fieldconfig fieldExpr="aberrationType"/>
+      <fieldconfig fieldExpr="organism.name" label="Organism" />
+    </fields>
+    <inlinelist>
+      <table path="synonyms.value" showLinksToObjects="false"/>
+    </inlinelist>
+  </class>
+
+  <!-- FBba balancers (added 2026-06-01 with flybase-aberrations source) -->
+  <class className="org.intermine.model.bio.Balancer">
+    <headerconfig>
+      <titles>
+        <title mainTitles="symbol|primaryIdentifier" />
+      </titles>
+      <customlinks>
+        <customlink
+          url="http://flybase.org/reports/{primaryIdentifier}.html"
+          image="flybase_logo.jpeg"
+        />
+      </customlinks>
+    </headerconfig>
+    <fields>
+      <fieldconfig fieldExpr="primaryIdentifier"/>
+      <fieldconfig fieldExpr="symbol"/>
+      <fieldconfig fieldExpr="balancedChromosome"/>
+      <fieldconfig fieldExpr="organism.name" label="Organism" />
+    </fields>
+  </class>
+
   <class className="org.intermine.model.bio.Author">
     <fields>
       <fieldconfig fieldExpr="name"/>
@@ -155,6 +200,9 @@
     <inlinelist>
       <table path="synonyms.value" showInHeader="true" lineLength="100" />
       <table path="probeSets.primaryIdentifier" showLinksToObjects="true" />
+      <!-- FBab aberrations affecting this gene (added 2026-06-01) -->
+      <table path="deletedByAberrations.symbol"    showLinksToObjects="true" />
+      <table path="duplicatedByAberrations.symbol" showLinksToObjects="true" />
     </inlinelist>
     <fields>
       <fieldconfig fieldExpr="secondaryIdentifier"/>
