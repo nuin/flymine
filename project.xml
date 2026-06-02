@@ -146,7 +146,7 @@
 
     <!-- FBab aberrations + FBba balancers; loads after chado-db-flybase-dmel
          (gene resolution by FBgn) and after flybase-alleles (Allele parent class). -->
-    <source name="flybase-aberrations" type="flybase-aberrations">
+    <source name="flybase-aberrations" type="flybase-aberrations" version="4.2.0">
       <property name="src.data.dir" location="/root/data/flybase/aberrations"/>
     </source>
 
