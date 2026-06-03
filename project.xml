@@ -111,15 +111,23 @@
     -->
     <source name="interpro" type="interpro">
       <property name="src.data.dir" location="/root/data/interpro/current"/>
+      <!-- narrow the dir scan to just the InterPro XML; default iteration also hits
+           names.dat, ParentChildTreeFile.txt, interpro.xml.gz which SAX-fail -->
+      <property name="src.data.dir.includes" value="interpro.xml"/>
     </source>
 
 <!-- has to be after UniProt because only loads protein domains for loaded proteins -->
+    <!-- disabled 2026-06-03: Protein2IPRConverter (InterMine core) expects uncompressed
+         protein2ipr.dat; FB-relevant subset is 17 GB gz / 150+ GB raw, disk-constrained on
+         AllianceMineDev. Upstream patch needed: read .gz via GZIPInputStream (the taxon=7227
+         filter discards 99% so streaming is free). See FLYMINE_PHASE1_BUILD_HANDOFF §3.3.
     <source name="protein2ipr" type="protein2ipr">
      <property name="src.data.dir" location="/root/data/interpro/match_complete/current"/>
      <property name="src.data.dir.includes" value="protein2ipr.dat"/>
      <property name="protein2ipr.organisms" value="7227"/>
      <property name="osAlias" value="os.production"/>
     </source>
+    -->
 
     <!-- disabled 2026-06-01: non-FB cross-organism (FlyBase-only build)
     <source name="omim" type="omim">
@@ -140,9 +148,13 @@
     <source name="do" type="do">
       <property name="src.data.file" location="/root/data/fms/ONTOLOGY_DOID.obo" />
     </source>
+    <!-- disabled 2026-06-03: converter ArrayIndexOutOfBoundsException on FB2026_01 21-col format;
+         redundant with chado-db's FlyBaseProcessor which already creates Allele items (233K rows
+         loaded on 2026-06-03 build). See FLYMINE_PHASE1_BUILD_HANDOFF_2026_06_03.md §3.1.
     <source name="flybase-alleles" type="flybase-alleles" version="4.2.0">
       <property name="src.data.dir" location="/root/data/flybase/alleles/current"/>
     </source>
+    -->
 
     <!-- FBab aberrations + FBba balancers; loads after chado-db-flybase-dmel
          (gene resolution by FBgn) and after flybase-alleles (Allele parent class). -->
@@ -169,6 +181,9 @@
     </source>
     <source name="go-annotation" type="go-annotation">
       <property name="src.data.dir" location="/root/data/fms"/>
+      <!-- narrow to FB GAF; default iteration also hits ONTOLOGY_*.obo and
+           ALLIANCE_COMBINED tsvs which fail GAF parsing -->
+      <property name="src.data.dir.includes" value="GAF_FB.gaf"/>
       <property name="ontologyPrefix" value="GO"/>
     </source>
     
@@ -386,10 +401,16 @@
       <property name="src.data.dir" location="/micklem/data/flymine/bdgp-insitu/current"/>
     </source>
     -->
+    <!-- disabled 2026-06-03: InterMine core generic OBO converter pathological on 33MB FBbt
+         (1h52m at 100% CPU, no output, killed). FBdv + FBcv via same base converter finished
+         in seconds (smaller graphs). Likely N^2 graph traversal on FBbt's dense is_a/part_of/
+         develops_from edges. Upstream-converter perf fix or alternate loader needed.
+         See FLYMINE_PHASE1_BUILD_HANDOFF §3.2.
     <source name="fly-anatomy-ontology" type="fly-anatomy-ontology" version="4.2.0">
       <property name="src.data.file" location="/root/data/fms/ONTOLOGY_FBBT.obo"/>
       <property name="ontologyPrefix" value="FBbt"/>
     </source>
+    -->
     <source name="fly-development-ontology" type="fly-development-ontology" version="4.2.0">
       <property name="src.data.file" location="/root/data/flybase/ontologies/fly_development.obo"/>
     </source>
@@ -479,10 +500,15 @@
       <property name="dataSourceFile" value="/root/data/uniprot/xrefs/current/dbxref.txt"/>
     </source>
 
+   <!-- disabled 2026-06-03: PubMed eutils API rate-limited / fails at 144K publications
+        without NCBI API key. chado already populated Publication.pubMedId so report pages
+        link to PubMed directly; full-record enrichment (title/authors/date) is deferred to
+        a follow-up with an NCBI key configured. See FLYMINE_PHASE1_BUILD_HANDOFF §3.4.
    <source name="update-publications" type="update-publications">
       <property name="src.data.file" location="publications.xml"/>
       <property name="loadFullRecord" value="true"/>
     </source>
+    -->
   </sources>
 
   <post-processing>
