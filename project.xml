@@ -22,7 +22,11 @@
     </source>
     <source name="chado-db-flybase-others" type="chado-db">
       <property name="source.db.name" value="flybase"/>
-      <property name="organisms" value="Dana Dere Dgri Dmoj Dper Dsec Dsim Dvir Dwil Dyak"/>
+      <!-- 2026-06-04: switched from chado abbreviations to NCBI taxon IDs per
+           builder Phase 2 §5 finding (abbreviation form matched 0 organisms in
+           FB2026_01 chado, only added 797 alleles from Dpse via the dpse source).
+           Order matches the abbreviation list: Dana Dere Dgri Dmoj Dper Dsec Dsim Dvir Dwil Dyak. -->
+      <property name="organisms" value="7217 7220 7222 7230 7234 7238 7240 7244 7260 7245"/>
       <property name="dataSourceName" value="FlyBase"/>
       <property name="processors"
                 value="org.intermine.bio.dataconversion.FlyBaseProcessor"/>
@@ -168,6 +172,18 @@
     <source name="flybase-allele-descriptions" type="flybase-allele-descriptions" version="4.2.0">
       <property name="src.data.dir" location="/root/data/flybase/alleles/current"/>
       <property name="src.data.dir.includes" value="dmel_classical_and_insertion_allele_descriptions*.tsv"/>
+    </source>
+
+    <!-- 2026-06-04: canonical FBal -> FBgn mapping. The FB2026_01 precomputed file has
+         305K FBals; chado-loaded Dmel feature table has only 239K. The ~66K delta is
+         transgene-vector alleles (Ecol\lacZ, Scer\GAL4, Avic\GFP, Hsap\* fusions) which
+         in chado are tagged with their source organism, not Dmel — chado's organism
+         filter drops them. This source loads ALL FBals; loader merges by
+         Allele.primaryIdentifier so existing chado items are no-ops and missing FBals
+         become new stubs. See FLYMINE_PHASE2_FINDINGS_HANDOFF_2026_06_04 §3 + §4. -->
+    <source name="flybase-allele-stubs" type="flybase-allele-stubs" version="4.2.0">
+      <property name="src.data.dir" location="/root/data/flybase/alleles/aux/current"/>
+      <property name="src.data.dir.includes" value="fbal_to_fbgn_*.tsv"/>
     </source>
 
 <!--
