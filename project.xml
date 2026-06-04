@@ -186,6 +186,27 @@
       <property name="src.data.dir.includes" value="fbal_to_fbgn_*.tsv"/>
     </source>
 
+    <!-- 2026-06-04: FBti transposable-element insertion sites (420K). Unblocks Aim 2
+         cross-class queries (stocks x transgenes x genes x insertion sites) and the
+         Aim 3 ID converter's FBti input. Loads from FB2026_01 precomputed file;
+         creates Chromosome + Location items for each insertion. Must run BEFORE
+         flybase-transgenic-constructs (which references FBti via Allele.gene-like
+         merge). See FLYMINE_PHASE2_DATA_AUDIT_HANDOFF_2026_06_04 §3. -->
+    <source name="flybase-insertions" type="flybase-insertions" version="4.2.0">
+      <property name="src.data.dir" location="/root/data/flybase/insertions/current"/>
+      <property name="src.data.dir.includes" value="insertion_mapping_*.tsv"/>
+    </source>
+
+    <!-- 2026-06-04: FBtp transgenic constructs (173K). The actual molecular tools
+         used to make transgenic stocks (P{lacW}, P{UAS-GAL4}, P{Avic\GFP} etc.).
+         Aim 2 transgenes core + Aim 4 BDSC stock-page linkage. Must run AFTER
+         flybase-insertions (FBti refs merge into items loaded by that source).
+         See FLYMINE_PHASE2_DATA_AUDIT_HANDOFF_2026_06_04 §4. -->
+    <source name="flybase-transgenic-constructs" type="flybase-transgenic-constructs" version="4.2.0">
+      <property name="src.data.dir" location="/root/data/flybase/transposons/current"/>
+      <property name="src.data.dir.includes" value="transgenic_construct_descriptions_*.tsv"/>
+    </source>
+
 <!--
     <source name="pdb" type="pdb">
       <property name="src.data.dir" location="/micklem/data/pdb/current"/>
