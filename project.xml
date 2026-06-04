@@ -160,6 +160,16 @@
       <property name="src.data.dir" location="/root/data/flybase/aberrations"/>
     </source>
 
+    <!-- 2026-06-03: lean replacement for the historical broken flybase-alleles source.
+         Loads description + supporting FBrf publications from the 21-col FB2026_01
+         precomputed file, merges by FBal into chado-loaded Allele rows. Other 21-col
+         fields (insertion details, alleleClass FBcv multi-values, encoded product,
+         tagged with, "also carries") are deferred to v2. -->
+    <source name="flybase-allele-descriptions" type="flybase-allele-descriptions" version="4.2.0">
+      <property name="src.data.dir" location="/root/data/flybase/alleles/current"/>
+      <property name="src.data.dir.includes" value="dmel_classical_and_insertion_allele_descriptions*.tsv"/>
+    </source>
+
 <!--
     <source name="pdb" type="pdb">
       <property name="src.data.dir" location="/micklem/data/pdb/current"/>
