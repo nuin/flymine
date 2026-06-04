@@ -11,7 +11,8 @@
       <property name="processors"
                 value="org.intermine.bio.dataconversion.FlyBaseProcessor org.intermine.bio.dataconversion.StockProcessor"/>
     </source>
-    <!-- disabled 2026-06-01: multi-species deferred for first delivery; non-dmel chado reads same dump, trivial re-enable
+    <!-- re-enabled 2026-06-03 (Phase 2 §3.2): same FB2026_01 chado-pg dump on AllianceMineDev,
+         no extra data fetch. Adds dpse + 10 other Drosophila species' genes/alleles/stocks. -->
     <source name="chado-db-flybase-dpse" type="chado-db">
       <property name="source.db.name" value="flybase"/>
       <property name="organisms" value="7237"/>
@@ -19,8 +20,6 @@
       <property name="processors"
                 value="org.intermine.bio.dataconversion.FlyBaseProcessor"/>
     </source>
-    -->
-    <!-- disabled 2026-06-01: multi-species deferred for first delivery; non-dmel chado reads same dump, trivial re-enable
     <source name="chado-db-flybase-others" type="chado-db">
       <property name="source.db.name" value="flybase"/>
       <property name="organisms" value="Dana Dere Dgri Dmoj Dper Dsec Dsim Dvir Dwil Dyak"/>
@@ -28,7 +27,6 @@
       <property name="processors"
                 value="org.intermine.bio.dataconversion.FlyBaseProcessor"/>
     </source>
-    -->
     <!-- disabled 2026-06-01: non-FB cross-organism (FlyBase-only build)
     <source name="wormbase-identifiers" type="wormbase-identifiers">
       <property name="src.data.dir" location="/micklem/data/worm-identifiers/current"/>
