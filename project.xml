@@ -174,6 +174,24 @@
       <property name="src.data.dir.includes" value="dmel_classical_and_insertion_allele_descriptions*.tsv"/>
     </source>
 
+    <!-- 2026-09-04: BDSC/STOCK gap-fill sources — merge-by-identifier into chado-loaded Gene/Protein -->
+    <source name="flybase-gene-descriptions" type="flybase-gene-descriptions" version="4.2.0">
+      <property name="src.data.dir" location="/root/data/flybase/genes"/>
+      <property name="src.data.dir.includes" value="best_gene_summary_*.tsv, automated_gene_summaries_*.tsv"/>
+    </source>
+    <source name="flybase-protein-symbol" type="flybase-protein-symbol" version="4.2.0">
+      <property name="src.data.dir" location="/root/data/flybase/genes"/>
+      <property name="src.data.dir.includes" value="fbgn_fbtr_fbpp_expanded_*.tsv"/>
+    </source>
+    <source name="flybase-gene-crossreferences" type="flybase-gene-crossreferences" version="4.2.0">
+      <property name="src.data.dir" location="/root/data/flybase/crossreferences/current"/>
+      <property name="src.data.dir.includes" value="gene_dbxrefs.tsv"/>
+    </source>
+    <source name="flybase-human-orthologs" type="flybase-human-orthologs" version="4.2.0">
+      <property name="src.data.dir" location="/root/data/flybase/orthologs"/>
+      <property name="src.data.dir.includes" value="dmel_human_orthologs_disease_*.tsv"/>
+    </source>
+
     <!-- 2026-06-04: canonical FBal -> FBgn mapping. The FB2026_01 precomputed file has
          305K FBals; chado-loaded Dmel feature table has only 239K. The ~66K delta is
          transgene-vector alleles (Ecol\lacZ, Scer\GAL4, Avic\GFP, Hsap\* fusions) which
