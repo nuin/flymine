@@ -222,6 +222,45 @@
       <property name="src.data.dir.includes" value="transgenic_construct_descriptions_*.tsv"/>
     </source>
 
+    <!-- Alliance 9.2.0, fly subset: scripts/prepare_alliance_data.py writes /root/data/alliance/9.2.0
+         with FlyBase CURIEs rewritten to bare FBgn/FBal ids so rows merge into the chado genes and alleles. -->
+    <source name="alliance-orthologs" type="alliance-orthologs" version="4.2.0">
+      <property name="src.data.dir" location="/root/data/alliance/9.2.0"/>
+      <property name="src.data.dir.includes" value="ORTHOLOGY-ALLIANCE_COMBINED.tsv"/>
+    </source>
+    <source name="alliance-paralogs" type="alliance-paralogs" version="4.2.0">
+      <property name="src.data.dir" location="/root/data/alliance/9.2.0"/>
+      <property name="src.data.dir.includes" value="paralogs.tsv"/>
+    </source>
+    <source name="alliance-disease" type="alliance-disease" version="4.2.0">
+      <property name="src.data.dir" location="/root/data/alliance/9.2.0"/>
+      <property name="src.data.dir.includes" value="disease-alliance.tsv"/>
+    </source>
+    <source name="alliance-disease-alleles" type="alliance-disease-alleles" version="4.2.0">
+      <property name="src.data.dir" location="/root/data/alliance/9.2.0"/>
+      <property name="src.data.dir.includes" value="disease-alleles.tsv"/>
+    </source>
+    <source name="alliance-disease-detail" type="alliance-disease-detail" version="4.2.0">
+      <property name="src.data.dir" location="/root/data/alliance/9.2.0"/>
+      <property name="src.data.dir.includes" value="disease-annotations-detail.tsv"/>
+    </source>
+    <source name="alliance-genetic-interactions" type="alliance-genetic-interactions" version="4.2.0">
+      <property name="src.data.dir" location="/root/data/alliance/9.2.0"/>
+      <property name="src.data.dir.includes" value="genetic-interactions.tsv"/>
+    </source>
+    <source name="alliance-molecular-interactions" type="alliance-molecular-interactions" version="4.2.0">
+      <property name="src.data.dir" location="/root/data/alliance/9.2.0"/>
+      <property name="src.data.dir.includes" value="molecular-interactions.tsv"/>
+    </source>
+    <source name="alliance-variants" type="alliance-variants" version="4.2.0">
+      <property name="src.data.dir" location="/root/data/alliance/9.2.0"/>
+      <property name="src.data.dir.includes" value="variants.tsv"/>
+    </source>
+    <source name="alliance-gene-descriptions" type="alliance-gene-descriptions" version="4.2.0">
+      <property name="src.data.dir" location="/root/data/alliance/9.2.0"/>
+      <property name="src.data.dir.includes" value="gene-descriptions.tsv"/>
+    </source>
+
 <!--
     <source name="pdb" type="pdb">
       <property name="src.data.dir" location="/micklem/data/pdb/current"/>
